@@ -1,3 +1,4 @@
+#include <vector>
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -10,6 +11,11 @@ void processInput(GLFWwindow *window) {
 }
 
 int main() {
+
+	int width = 800;
+	int height = 600;
+
+	std::vector<std::byte> framebuffer(width * height * 4);
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -34,7 +40,7 @@ int main() {
 		return -1;
 	}
 
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, width, height);
 
 	while(!glfwWindowShouldClose(window)) {
 		
