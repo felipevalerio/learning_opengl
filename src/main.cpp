@@ -1,8 +1,12 @@
+#include <ppm.h>
 #include <vector>
+#include <stdint.h>
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+const int WIDTH = 800;
+const int HEIGHT = 600;
 
 void processInput(GLFWwindow *window) {
 	if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -12,18 +16,17 @@ void processInput(GLFWwindow *window) {
 
 int main() {
 
-	int width = 800;
-	int height = 600;
+	std::vector<uint8_t> framebuffer(WIDTH * HEIGHT * 4);
 
-	std::vector<std::byte> framebuffer(width * height * 4);
+	create_ppm(WIDTH, HEIGHT, framebuffer);
+	save_ppm("output.ppm", WIDTH, HEIGHT, framebuffer);
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
 
 	if (window == NULL) {
 		
@@ -40,7 +43,7 @@ int main() {
 		return -1;
 	}
 
-	glViewport(0, 0, width, height);
+	glViewport(0, 0, WIDTH, HEIGHT);
 
 	while(!glfwWindowShouldClose(window)) {
 		
