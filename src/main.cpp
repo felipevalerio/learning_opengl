@@ -1,4 +1,3 @@
-#include <ppm.h>
 #include <vector>
 #include <stdint.h>
 #include <iostream>
@@ -15,11 +14,6 @@ void processInput(GLFWwindow *window) {
 }
 
 int main() {
-
-	std::vector<uint8_t> framebuffer(WIDTH * HEIGHT * 4);
-
-	create_ppm(WIDTH, HEIGHT, framebuffer);
-	save_ppm("output.ppm", WIDTH, HEIGHT, framebuffer);
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
